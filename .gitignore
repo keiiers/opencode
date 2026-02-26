@@ -28,3 +28,17 @@ opencode-dev
 logs/
 *.bun-build
 tsconfig.tsbuildinfo
+.bun_cache/
+OPENCODE_NOTES.md
+.trae/
+
+.local/
+.xdg/
+.tmp/
+bun_dist/
+bun
+opencode
+install_opencode.sh
+start_dev.sh
+Dockerfile
+.dockerignore
