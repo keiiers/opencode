@@ -66,3 +66,22 @@ JavaScript 代码本身只是纯文本，需要 Runtime 提供解析引擎和 AP
 - **解析与编译**: 把人类写的代码翻译成机器能懂的指令 (例如通过 V8 引擎)。
 - **提供 API**: 给代码提供操作系统的能力 (如「读取文件」、「发送网络请求」)。
 - **内存管理**: 自动分配和回收内存 (Garbage Collection)。
+
+## Git 远程仓库与权限 (2025-02-26)
+
+**推送去哪里？**
+- `origin` (您的仓库): `https://github.com/keiiers/opencode.git`
+- `upstream` (官方仓库): `https://github.com/anomalyco/opencode.git`
+
+**权限控制**
+- 您對 `origin` 有完整的**讀寫權限** (Push & Pull)。
+- 您對 `upstream` 通常只有**讀取權限** (Pull only)，無法直接推送。
+
+**如何贡献代码？**
+如果您希望將代碼貢獻給官方，必須通過 **Pull Request (PR)** 流程：
+1.  推送到您的 `origin`。
+2.  在 GitHub 介面上發起 PR 請求合併到 `upstream`。
+3.  官方審核通過後才會合併。
+
+**隐私安全**
+只要不發起包含私人文件的 PR，您的 `NOTES.md` 就只會存在於您的電腦和您的 GitHub (`origin`) 上，官方倉庫不會有這份文件。
