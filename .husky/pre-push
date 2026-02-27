@@ -1,4 +1,7 @@
 #!/bin/sh
+# Add Bun to PATH for non-interactive shells
+export PATH="$HOME/.bun/bin:$PATH"
+
 set -e
 # Check if bun version matches package.json
 # keep in sync with packages/script/src/index.ts semver qualifier

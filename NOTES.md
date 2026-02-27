@@ -99,3 +99,24 @@ JavaScript 代码本身只是纯文本，需要 Runtime 提供解析引擎和 AP
 - **合併按鈕**: 點擊右上角的 ⭃ (Merge) 按鈕。
 - **選擇目標**: 在選單中搜尋並選擇 `upstream/dev` (官方主分支)。
 - **確認**: 觀察圖表，確保 `dev` 標籤與 `upstream/dev` 連接在一起。
+
+## 推送失敗排查 (2025-02-27)
+
+**問題描述**
+在執行 `git push` 時報錯 `bun: command not found`，即使已經更新了 `bun`。
+
+**原因**
+Git 的 `pre-push` 鉤子腳本是在一個**非交互式 shell** (non-interactive shell) 中運行的。
+雖然我們在 `.zshrc` 中設定了 PATH，但這個設定可能只在**交互式**終端（你打開的那個黑框框）裡生效。當 Git 在後台執行腳本時，它可能讀不到這個 PATH 設定，導致找不到 `bun`。
+
+**解決方案**
+1.  **永久修復**: 我們修改了 `.husky/pre-push` 腳本，在腳本開頭手動添加了 `bun` 的路徑：
+    ```bash
+    #!/bin/sh
+    # Add Bun to PATH for non-interactive shells
+    export PATH="$HOME/.bun/bin:$PATH"
+    ```
+2.  **臨時修復**: 通過指令強制傳遞 PATH：
+    ```bash
+    export PATH=$HOME/.bun/bin:$PATH && bun -v && git push origin dev
+    ```
